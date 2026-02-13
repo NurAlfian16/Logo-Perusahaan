@@ -3,18 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechNova Logo Design</title>
-    <!-- Menggunakan font Google 'Inter' untuk kesan modern dan bersih -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <title>Pulse - Logo Animasi</title>
+    <!-- Google Fonts: Montserrat untuk kesan modern -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
     
     <style>
-        /* Pengaturan Dasar */
-        :root {
-            --blue-electric: #007bff;
-            --white: #ffffff;
-            --dark-bg: #0a0a0a;
-        }
-
+        /* Pengaturan Dasar dan Tata Letak */
         body {
             margin: 0;
             padding: 0;
@@ -22,108 +16,151 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: var(--dark-bg); /* Latar belakang gelap untuk menonjolkan warna elektrik */
-            font-family: 'Inter', sans-serif;
+            background-color: #0f0f1b; /* Latar belakang gelap agar gradien menonjol */
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
         }
 
         /* Kontainer Utama Logo */
-        .logo-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 15px; /* Jarak antara ikon dan teks */
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .logo-wrapper:hover {
-            transform: scale(1.05);
-        }
-
-        /* Gaya Ikon Heksagon Abstrak */
-        .logo-icon {
+        .logo-container {
             position: relative;
-            width: 60px;
-            height: 60px;
+            width: 250px;
+            height: 250px;
             display: flex;
             justify-content: center;
             align-items: center;
+            cursor: pointer;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Menggunakan SVG untuk bentuk heksagon yang presisi dan futuristik */
-        .hexagon-svg {
-            width: 100%;
-            height: 100%;
-            filter: drop-shadow(0 0 8px rgba(0, 123, 255, 0.6));
-            animation: pulse 3s infinite ease-in-out;
+        /* Efek Rotasi 360 derajat saat Hover */
+        .logo-container:hover {
+            transform: rotate(360deg);
         }
 
-        /* Gaya Teks TechNova */
-        .logo-text {
-            color: var(--white);
-            font-size: 42px;
-            font-weight: 800;
-            letter-spacing: -1.5px;
-            line-height: 1;
-            text-transform: none;
-            display: flex;
-            align-items: center;
-        }
-
-        /* Aksen untuk bagian 'Nova' */
-        .logo-text span {
-            color: var(--blue-electric);
-            font-weight: 400; /* Membuat kontras antara tebal dan tipis */
-            margin-left: 2px;
-        }
-
-        /* Animasi halus agar terlihat futuristik */
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(0.96); opacity: 0.85; }
-        }
-
-        /* Efek Glow tambahan pada hover */
-        .logo-wrapper:hover .hexagon-svg {
-            filter: drop-shadow(0 0 15px rgba(0, 123, 255, 0.9));
-        }
-
-        /* Keterangan di bawah logo */
-        .label {
+        /* Lingkaran Utama dengan Gradien Ungu-Oranye */
+        .pulse-circle {
             position: absolute;
-            bottom: 40px;
-            color: #444;
-            font-size: 12px;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #8e2de2, #f09819);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 20px rgba(142, 45, 226, 0.5);
+            z-index: 2;
+            /* Animasi denyut bawaan */
+            animation: pulse-animation 2s infinite;
+            transition: all 0.3s ease;
+        }
+
+        /* Bayangan lingkaran untuk efek gelombang (Ring) */
+        .pulse-ring {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border: 2px solid #8e2de2;
+            border-radius: 50%;
+            z-index: 1;
+            opacity: 0;
+            animation: ring-animation 2s infinite;
+        }
+
+        /* Nama Brand di tengah lingkaran */
+        .brand-name {
+            color: white;
+            font-size: 32px;
+            font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 2px;
+            z-index: 3;
+            user-select: none;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Keyframes untuk Efek Denyut Lingkaran Utama */
+        @keyframes pulse-animation {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 20px rgba(142, 45, 226, 0.5);
+            }
+            50% {
+                transform: scale(1.1);
+                box-shadow: 0 0 40px rgba(240, 152, 25, 0.7);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 20px rgba(142, 45, 226, 0.5);
+            }
+        }
+
+        /* Keyframes untuk Efek Gelombang Meluas (Ring) */
+        @keyframes ring-animation {
+            0% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(1.8);
+                opacity: 0;
+            }
+        }
+
+        /* Kelas khusus saat diklik (dipicu oleh JS) */
+        .pulse-active {
+            animation-duration: 0.5s !important; /* Denyut jadi lebih cepat */
+        }
+
+        /* Label instruksi */
+        .hint {
+            position: absolute;
+            bottom: 40px;
+            color: #666;
+            font-size: 14px;
+            letter-spacing: 1px;
         }
     </style>
 </head>
 <body>
 
-    <div class="logo-wrapper">
-        <!-- Ikon Heksagon Abstrak menggunakan SVG -->
-        <div class="logo-icon">
-            <svg class="hexagon-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                <!-- Heksagon Luar -->
-                <path d="M50 5 L90 25 L90 75 L50 95 L10 75 L10 25 Z" 
-                      fill="none" 
-                      stroke="#007bff" 
-                      stroke-width="8" 
-                      stroke-linejoin="round"/>
-                <!-- Detail Abstrak di Tengah (Futuristik) -->
-                <path d="M50 30 L70 40 L70 60 L50 70 L30 60 L30 40 Z" 
-                      fill="#007bff" />
-                <rect x="46" y="5" width="8" height="20" fill="#007bff" />
-            </svg>
-        </div>
-
-        <!-- Teks Logo -->
-        <div class="logo-text">
-            Tech<span>Nova</span>
+    <div class="logo-container" id="logoContainer">
+        <!-- Efek Ring/Gelombang -->
+        <div class="pulse-ring"></div>
+        
+        <!-- Lingkaran Utama -->
+        <div class="pulse-circle" id="mainCircle">
+            <span class="brand-name">Pulse</span>
         </div>
     </div>
 
-    <div class="label">Minimalist Tech Branding</div>
+    <div class="hint">Arahkan kursor atau klik pada logo</div>
 
+    <script>
+        const container = document.getElementById('logoContainer');
+        const circle = document.getElementById('mainCircle');
+
+        // Menangani interaksi klik menggunakan JavaScript
+        container.addEventListener('mousedown', () => {
+            // Tambahkan kelas untuk mempercepat denyut saat ditekan
+            circle.classList.add('pulse-active');
+            
+            // Efek haptic visual sederhana
+            circle.style.filter = 'brightness(1.3)';
+        });
+
+        window.addEventListener('mouseup', () => {
+            // Kembalikan ke normal setelah 500ms
+            setTimeout(() => {
+                circle.classList.remove('pulse-active');
+                circle.style.filter = 'brightness(1)';
+            }, 300);
+        });
+
+        // Contoh tambahan: Mengubah warna gradien sedikit saat di-klik
+        container.addEventListener('click', () => {
+            console.log('Brand Pulse diinteraksi!');
+        });
+    </script>
 </body>
 </html>
